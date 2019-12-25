@@ -46,5 +46,6 @@ for url in urls:
     #新闻标题
     news_titles=[paper.replace('\u3000','') for paper in papers if paper not in real_paper]
 
+#后续要做的事情：数据写入excel，搞一个图形界面，可以筛选日期的那种
 
 
