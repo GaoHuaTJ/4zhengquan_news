@@ -1,4 +1,4 @@
-
+#高华 2019.12.25
 import requests
 #发请求
 day_sum_url="http://finance.sina.com.cn/focus/zqbjh/"
