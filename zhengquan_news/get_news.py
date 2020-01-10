@@ -28,7 +28,7 @@ for index, url in enumerate(urls):
     for node in nodes:
         news.append(node.xpath("string(.)"))
     news = [new.strip() for new in news if new.find("责任编辑") == -1]
-    real_paper = ["中国证券报", "证券时报", "上海证券报", "证券日报"]
+    real_paper = ['中国证券报','上海证券报','证券时报','证券日报']
     final_paper = []  # 存储最后的正确顺序的报纸
     news_titles = []  # 存储新闻标题
     news_contents = []  # 存储新闻内容
@@ -55,7 +55,11 @@ for index, url in enumerate(urls):
     df = df.append(df_temp)
 
 
-df=df.sort_values(by='时间')  # 按照时间先后排序
+#数据的排序处理，需要先按照时间排序，再按照报纸的既定顺序进行排序
+df['报刊']=df['报刊'].astype('category')
+list_custom=['中国证券报','上海证券报','证券时报','证券日报']#正确的顺序列表
+df['报刊'].cat.reorder_categories(list_custom, inplace=True)#排序之前转换格式
+df=df.sort_values(by=['时间','报刊'])  # 先按照时间先后排序，再按照给定的
 df.to_excel(r"四大证券报.xlsx", encoding='gb2312', index=0)  # 输出到excel
 
 print("\n运行结束")
